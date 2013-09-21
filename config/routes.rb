@@ -1,5 +1,5 @@
 Papertrail::Application.routes.draw do
-  resources :documents, :path => '/', :only => [:index,:show]
+  resources :documents, :path => '/', :except => [:new,:edit]
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

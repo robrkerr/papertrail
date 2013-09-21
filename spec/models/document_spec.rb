@@ -39,7 +39,7 @@ describe Document do
 				Document.first.root_point.context.description.should == "title" 
 			end
 			it "the document's root point belongs to the document" do 
-				Document.first.root_point.document.id.should == Document.first.id 
+				Document.first.root_point.document.should == Document.first
 			end
 			it "the document has the correct title" do Document.first.title.should == "Title 1" end
 		end
