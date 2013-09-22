@@ -9,39 +9,83 @@ describe Document do
 			doc.root_point_id = point_records[title_points[i]].id
 			doc.save
 		}
-		Subpointlink.create(subpointlinks)
+		subpointlink_records = subpointlinks.map { |e| 
+			{
+				point_id: point_records[e[0]].id,
+				subpoint_id: point_records[e[1]].id
+			}
+		}
+		Subpointlink.create(subpointlink_records)
 	end
 
-	context "when the documents have no subpoints" do 
+	context "when no documents have been created" do
+		let(:documents) { [] }
+		let(:points) { [] }
+		let(:title_points) { [] }
 		let(:subpointlinks) { [] }
 
-		context "when no documents have been created" do
-			let(:documents) { [] }
-			let(:points) { [] }
-			let(:title_points) { [] }
+		it "has no documents" do Document.count.should == 0 end
+		it "has no points" do Point.count.should == 0 end
+		it "has no subpointlinks" do Subpointlink.count.should == 0 end
+	end
+
+	context "when one document has been created" do
+		let(:documents) { [{}] }
+		let(:points) { [{text: "Title 1", 
+									 	 context_id: Context.where(description: "title").first.id, 
+									   document_id: Document.first.id }] }
+		let(:title_points) { [0] }
+		let(:subpointlinks) { [] }
+
+		it "has one document" do Document.count.should == 1 end
+		it "has one point" do Point.count.should == 1 end
+		it "has no subpointlinks" do Subpointlink.count.should == 0 end
+		it "the document's root point has context 'title'" do 
+			Document.first.root_point.context.description.should == "title" 
+		end
+		it "the document's root point belongs to the document" do 
+			Document.first.root_point.document.should == Document.first
+		end
+		it "the document has the correct title" do Document.first.title.should == "Title 1" end
+
+		context "when the document is then deleted" do
+			before do
+				Document.first.destroy
+			end
 
 			it "has no documents" do Document.count.should == 0 end
 			it "has no points" do Point.count.should == 0 end
 			it "has no subpointlinks" do Subpointlink.count.should == 0 end
 		end
 
-		context "when one documents has been created" do
-			let(:documents) { [{}] }
+		context "when a point is added" do
 			let(:points) { [{text: "Title 1", 
-										 	 context_id: Context.where(description: "title").first.id, 
-										   document_id: Document.first.id }] }
-			let(:title_points) { [0] }
+									 	 context_id: Context.where(description: "title").first.id, 
+									   document_id: Document.first.id },
+									    {text: "Here is a result.", 
+									 	   context_id: Context.where(description: "result").first.id, 
+									     document_id: Document.first.id }] }
+			let(:subpointlinks) { [[0,1]] }
 
-			it "has one document" do Document.count.should == 1 end
-			it "has one point" do Point.count.should == 1 end
-			it "has no subpointlinks" do Subpointlink.count.should == 0 end
-			it "the document's root point has context 'title'" do 
-				Document.first.root_point.context.description.should == "title" 
+			it "has no documents" do Document.count.should == 1 end
+			it "has no points" do Point.count.should == 2 end
+			it "has no subpointlinks" do Subpointlink.count.should == 1 end
+			it "there is a point with text 'Here is a result.'" do 
+				Point.where(text: "Here is a result.").count.should == 1
 			end
-			it "the document's root point belongs to the document" do 
-				Document.first.root_point.document.should == Document.first
+			it "this point has context 'result'" do 
+				Point.where(text: "Here is a result.").first.context.description.should == "result"
 			end
-			it "the document has the correct title" do Document.first.title.should == "Title 1" end
+
+			context "when that point is then deleted" do
+				before do
+					Point.where(text: "Here is a result.").first.destroy
+				end
+
+				it "has no documents" do Document.count.should == 1 end
+				it "has no points" do Point.count.should == 1 end
+				it "has no subpointlinks" do Subpointlink.count.should == 0 end
+			end
 		end
 	end
 end

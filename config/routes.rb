@@ -2,7 +2,6 @@ Papertrail::Application.routes.draw do
   resources :documents, :except => [:new,:edit], :constraints => {:format => 'json'} do
     resources :points, :except => [:new,:edit,:index], :constraints => {:format => 'json'}
   end
-  # match '*' => 'application#index'
   root :to => 'application#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.

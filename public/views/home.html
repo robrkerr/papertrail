@@ -1,7 +1,7 @@
 <h1> List of Documents </h1>
 
-<ul>
+<ul ng-if="documents.length">
 	<li ng-repeat="doc in documents"><button ng-click="remove_document(doc)">x</button><a href="#/{{doc.id}}">{{doc.title.text}}</a></li>
+	<li><button ng-click="create_document()">New Document</button></li>
 </ul>
 
-<button ng-click="create_document()">New Document</button>

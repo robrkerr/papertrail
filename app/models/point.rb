@@ -1,11 +1,18 @@
 class Point < ActiveRecord::Base
-	has_many :subpointlinks
+	has_many :subpointlinks, dependent: :destroy
+	has_many :parentpointlinks, dependent: :destroy, 
+															class_name: "Subpointlink",
+															foreign_key: "subpoint_id"
 	has_many :subpoints, through: :subpointlinks
 	belongs_to :context
 	belongs_to :document
 
 	def full_attributes
-		attributes.merge({children: subpoints, context: context.description})
+		subpoints_with_context = subpoints.map { |e| 
+			e.attributes.merge({context: e.context.description}) 
+		}
+		attributes.merge({children: subpoints_with_context, 
+			   							context: context.description})
 	end
 
 end

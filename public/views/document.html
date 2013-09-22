@@ -2,11 +2,30 @@
 
 <input type="text" ng-model="document_title">
 
-<!-- <ul>
-	<li ng-repeat="point in main_points"><button ng-click="remove_point(point)">x</button>{{point.text}}</li>
-</ul>
+<h2> Points: </h2>
 
-<button ng-click="create_point()">New Document</button> -->
+<div>
+	<ul ng-if="title_point.children.length">
+		<li ng-repeat="point in title_point.children">
+			<input type="radio" name="main" ng-model="title_point.active_child" value="{{point.id}}" ng-click="retrieve_subpoints(point)"/>
+			<button ng-click="remove_point(point,title_point)">x</button>
+			{{point.context}}:
+			<input type="text" ng-model="point.text"></input>
+			<ul ng-if="title_point.active_child == point.id">
+				<li ng-repeat="subpoint in point.children">
+					<input type="radio" name="sub1" ng-model="point.active_child" value="{{subpoint.id}}"/>
+					<button ng-click="remove_point(subpoint,point)">x</button>
+					{{subpoint.context}}:
+					<input type="text" ng-model="subpoint.text"></input>
+				</li>
+				<li>
+					<button ng-click="create_point(point)">New point</button>
+				</li>
+			</ul>
+		</li>
+		<li><button ng-click="create_point(title_point)">New point</button></li>
+	</ul>
+</div>
 
-<div><a href="#/"> Back</a></div>
+<div><a href="#/"> Back to document list</a></div>
 
