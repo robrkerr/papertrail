@@ -6,12 +6,16 @@ class DocumentsController < ApplicationController
 	end
   
   def show
-  	
+    respond_to do |format|
+      format.json { render :json => @document.full_attributes.to_json }
+    end
   end
 
   def index
-  	@document_list = Document.all
-  	@new_document = Document.new 
+  	@document_list = Document.all.map { |doc| doc.full_attributes }
+  	respond_to do |format|
+      format.json { render :json => @document_list.to_json }
+    end
   end
 
   def create
@@ -20,15 +24,19 @@ class DocumentsController < ApplicationController
   	new_root_point = Point.create({text: "Untitled", context_id: title_id, document_id: new_document.id })
   	new_document.root_point_id = new_root_point.id
 		new_document.save
-		redirect_to new_document
+		respond_to do |format|
+      format.json { render :json => new_document.full_attributes.to_json }
+    end
   end
 
   def destroy
-  	
+  	@document.destroy
+  	respond_to do |format|
+      format.json { render :json => {}.to_json }
+    end
   end
 
   def update
-  	
   end
 
 end

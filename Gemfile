@@ -6,6 +6,7 @@ gem 'rails', '3.1.0'
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
 gem 'pg'
+gem 'rack-cors', :require => 'rack/cors'
 
 
 # Gems used only for assets and not required
