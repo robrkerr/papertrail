@@ -32,7 +32,7 @@ describe Document do
 	context "when one document has been created" do
 		let(:documents) { [{}] }
 		let(:points) { [{text: "Title 1", 
-									 	 context_id: Context.where(description: "title").first.id, 
+									 	 context_id: Context.where(description: "Title").first.id, 
 									   document_id: Document.first.id }] }
 		let(:title_points) { [0] }
 		let(:subpointlinks) { [] }
@@ -40,8 +40,8 @@ describe Document do
 		it "has one document" do Document.count.should == 1 end
 		it "has one point" do Point.count.should == 1 end
 		it "has no subpointlinks" do Subpointlink.count.should == 0 end
-		it "the document's root point has context 'title'" do 
-			Document.first.root_point.context.description.should == "title" 
+		it "the document's root point has context 'Title'" do 
+			Document.first.root_point.context.description.should == "Title" 
 		end
 		it "the document's root point belongs to the document" do 
 			Document.first.root_point.document.should == Document.first
@@ -60,10 +60,10 @@ describe Document do
 
 		context "when a point is added" do
 			let(:points) { [{text: "Title 1", 
-									 	 context_id: Context.where(description: "title").first.id, 
+									 	 context_id: Context.where(description: "Title").first.id, 
 									   document_id: Document.first.id },
 									    {text: "Here is a result.", 
-									 	   context_id: Context.where(description: "result").first.id, 
+									 	   context_id: Context.where(description: "Result").first.id, 
 									     document_id: Document.first.id }] }
 			let(:subpointlinks) { [[0,1]] }
 
@@ -73,8 +73,8 @@ describe Document do
 			it "there is a point with text 'Here is a result.'" do 
 				Point.where(text: "Here is a result.").count.should == 1
 			end
-			it "this point has context 'result'" do 
-				Point.where(text: "Here is a result.").first.context.description.should == "result"
+			it "this point has context 'Result'" do 
+				Point.where(text: "Here is a result.").first.context.description.should == "Result"
 			end
 
 			context "when that point is then deleted" do

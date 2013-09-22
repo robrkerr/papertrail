@@ -14,7 +14,7 @@ class PointsController < ApplicationController
   def create
   	new_point = Point.create({
 			text: "", 
-			context_id: Context.where(description: 'result').first.id,
+			context_id: Context.where(description: 'Result').first.id,
 			document_id: params[:document_id].to_i 
   	})
   	if params[:parent_id]
@@ -33,8 +33,8 @@ class PointsController < ApplicationController
   end
 
   def update
-  	p params
-  	@point.text = params[:text]
+  	@point.context_id = params[:context_id] if params[:context_id]
+  	@point.text = params[:text] if params[:text]
   	@point.save
   	respond_to do |format|
       format.json { render :json => @point.full_attributes.to_json }
