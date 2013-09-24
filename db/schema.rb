@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(:version => 20130918020713) do
   create_table "subpointlinks", :force => true do |t|
     t.integer  "point_id"
     t.integer  "subpoint_id"
+    t.integer  "position"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

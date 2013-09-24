@@ -1,5 +1,5 @@
 class Point < ActiveRecord::Base
-	has_many :subpointlinks, dependent: :destroy
+	has_many :subpointlinks, dependent: :destroy, order: "position ASC"
 	has_many :parentpointlinks, dependent: :destroy, 
 															class_name: "Subpointlink",
 															foreign_key: "subpoint_id"
@@ -13,6 +13,11 @@ class Point < ActiveRecord::Base
 		}
 		attributes.merge({children: subpoints_with_context, 
 			   							context: context.description})
+	end
+
+	def next_position
+		return 0 if subpointlinks.empty?
+		subpointlinks.map { |e| e.position }.max + 1
 	end
 
 end

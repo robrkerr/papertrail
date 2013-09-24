@@ -6,26 +6,5 @@
 
 <ul pointtree="title_point"></ul>
 
-<!-- <ul>
-	<li ng-repeat="point in title_point.children">
-		<input type="radio" name="main" ng-model="title_point.active_child" value="{{point.id}}" ng-click="retrieve_subpoints(point)"/>
-		<button ng-click="remove_point(point,title_point)">x</button>
-		<select ng-blur="push_point_context(point)" ng-model="point.context_id" ng-options="c.id as c.description for c in contexts">
-		<input ng-blur="push_point_text(point)" type="text" ng-model="point.text"></input>
-		<ul ng-if="title_point.active_child == point.id">
-			<li ng-repeat="subpoint in point.children">
-				<input type="radio" name="sub1" ng-model="point.active_child" value="{{subpoint.id}}"/>
-				<button ng-click="remove_point(subpoint,point)">x</button>
-				<select ng-model="subpoint.context_id" ng-options="c.id as c.description for c in contexts">
-				<input type="text" ng-model="subpoint.text"></input>
-			</li>
-			<li>
-				<button ng-click="create_point(point)">New point</button>
-			</li>
-		</ul>
-	</li>
-	<li><button ng-click="create_point(title_point)">New point</button></li>
-</ul> -->
-
 <div><a href="#/"> Back to document list</a></div>
 

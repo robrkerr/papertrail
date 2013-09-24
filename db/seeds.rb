@@ -17,4 +17,5 @@ Context.create([{ description: 'Title' },
 								{ description: 'Nomenclature' },
 								{ description: 'Discussion' },
 								{ description: 'Figure' },
+								{ description: 'Comment' },
 								{ description: 'Reference' }])

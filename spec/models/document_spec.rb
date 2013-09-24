@@ -12,7 +12,8 @@ describe Document do
 		subpointlink_records = subpointlinks.map { |e| 
 			{
 				point_id: point_records[e[0]].id,
-				subpoint_id: point_records[e[1]].id
+				subpoint_id: point_records[e[1]].id,
+				position: e[2]
 			}
 		}
 		Subpointlink.create(subpointlink_records)
@@ -46,7 +47,12 @@ describe Document do
 		it "the document's root point belongs to the document" do 
 			Document.first.root_point.document.should == Document.first
 		end
-		it "the document has the correct title" do Document.first.title.should == "Title 1" end
+		it "the document has the correct title" do 
+			Document.first.title.should == "Title 1" 
+		end
+		it "the next subpointlink position for the root point is correct" do 
+			Document.first.root_point.next_position.should == 0
+		end
 
 		context "when the document is then deleted" do
 			before do
@@ -65,16 +71,22 @@ describe Document do
 									    {text: "Here is a result.", 
 									 	   context_id: Context.where(description: "Result").first.id, 
 									     document_id: Document.first.id }] }
-			let(:subpointlinks) { [[0,1]] }
+			let(:subpointlinks) { [[0,1,0]] }
 
-			it "has no documents" do Document.count.should == 1 end
-			it "has no points" do Point.count.should == 2 end
-			it "has no subpointlinks" do Subpointlink.count.should == 1 end
+			it "has one document" do Document.count.should == 1 end
+			it "has one point" do Point.count.should == 2 end
+			it "has one subpointlink" do Subpointlink.count.should == 1 end
 			it "there is a point with text 'Here is a result.'" do 
 				Point.where(text: "Here is a result.").count.should == 1
 			end
 			it "this point has context 'Result'" do 
 				Point.where(text: "Here is a result.").first.context.description.should == "Result"
+			end
+			it "the next subpointlink position for the root point is correct" do 
+				Document.first.root_point.next_position.should == 1
+			end
+			it "the next subpointlink position for the added point is correct" do 
+				Point.where(text: "Here is a result.").first.next_position.should == 0 
 			end
 
 			context "when that point is then deleted" do

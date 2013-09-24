@@ -17,6 +17,7 @@ class CreateTables < ActiveRecord::Migration
     create_table :subpointlinks do |t|
       t.integer :point_id
       t.integer :subpoint_id
+      t.integer :position
 
       t.timestamps
     end
