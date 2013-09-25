@@ -21,7 +21,10 @@ class DocumentsController < ApplicationController
   def create
   	new_document = Document.create!({}) 
   	title_id = Context.where(description: "Title").first.id
-  	new_root_point = Point.create({text: "Untitled", context_id: title_id, document_id: new_document.id })
+  	new_root_point = Point.create({text: "Untitled", 
+  																 context_id: title_id, 
+  																 document_id: new_document.id,
+  																 document_position: 0 })
   	new_document.root_point_id = new_root_point.id
 		new_document.save
 		respond_to do |format|

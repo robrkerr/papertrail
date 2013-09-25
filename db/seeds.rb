@@ -10,12 +10,12 @@ Document.delete_all
 Point.delete_all
 Subpointlink.delete_all
 Context.delete_all
-Context.create([{ description: 'Title' },
-								{ description: 'Background' },
-								{ description: 'Result' },
-								{ description: 'Method' },
-								{ description: 'Nomenclature' },
-								{ description: 'Discussion' },
-								{ description: 'Figure' },
-								{ description: 'Comment' },
-								{ description: 'Reference' }])
+Context.create([{ description: 'Title', position: 0 },
+								{ description: 'Background', position: 1 },
+								{ description: 'Nomenclature', position: 2 },
+								{ description: 'Result', position: 3 },
+								{ description: 'Method', position: 4 },
+								{ description: 'Discussion', position: 5 },
+								{ description: 'Figure', position: 6 },
+								{ description: 'Reference', position: 7 },
+								{ description: 'Comment', position: 8 }])

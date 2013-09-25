@@ -1,6 +1,8 @@
 Papertrail::Application.routes.draw do
   resources :documents, :except => [:new,:edit], :constraints => {:format => 'json'} do
-    resources :points, :except => [:new,:edit,:index], :constraints => {:format => 'json'}
+    resources :points, :except => [:new,:edit], :constraints => {:format => 'json'} do
+      resources :subpointlinks, :only => [:create,:destroy,:update], :constraints => {:format => 'json'}
+    end
   end
   resources :contexts, :only => [:index], :constraints => {:format => 'json'}
   root :to => 'application#index'

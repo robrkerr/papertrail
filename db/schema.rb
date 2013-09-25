@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(:version => 20130918020713) do
 
   create_table "contexts", :force => true do |t|
     t.string   "description"
+    t.integer  "position"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -28,6 +29,7 @@ ActiveRecord::Schema.define(:version => 20130918020713) do
   create_table "points", :force => true do |t|
     t.integer  "context_id"
     t.integer  "document_id"
+    t.integer  "document_position"
     t.text     "text"
     t.datetime "created_at"
     t.datetime "updated_at"

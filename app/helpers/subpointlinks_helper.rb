@@ -1,0 +1,2 @@
+module SubpointlinksHelper
+end

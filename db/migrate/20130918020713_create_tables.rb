@@ -9,6 +9,7 @@ class CreateTables < ActiveRecord::Migration
     create_table :points do |t|
       t.integer :context_id
       t.integer :document_id
+      t.integer :document_position
       t.text :text
 
       t.timestamps
@@ -26,6 +27,7 @@ class CreateTables < ActiveRecord::Migration
 
     create_table :contexts do |t|
       t.string :description
+      t.integer :position
 
       t.timestamps
     end

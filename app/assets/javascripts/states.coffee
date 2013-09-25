@@ -12,5 +12,9 @@ app.config ($stateProvider, $urlRouterProvider) ->
       url: '/:document_id'
       templateUrl: 'views/document.html'
       controller: 'DocumentController'
+    .state 'points',
+      url: '/:document_id/points'
+      templateUrl: 'views/points.html'
+      controller: 'PointsController'
 
     
