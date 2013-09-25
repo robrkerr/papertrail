@@ -1,12 +1,28 @@
-<h1> Document Title: </h1>
-
-<input ng-blur="push_title()" type="text" ng-model="document_title">
-
-<h2> Points: </h2>
-
-<ul pointtree="title_point"></ul>
+<h3> Document Title: <input ng-blur="push_title()" type="text" ng-model="document_title"> </h3>
 
 <div><a href="#/{{document.id}}/points"> View document points</a></div>
-
 <div><a href="#/"> Back to document list</a></div>
+
+<div class="column_outer">
+	<div class="column_inner">
+		<span class="{{point.class}}" ng-click="activate(point,1)" ng-repeat="point in panel_point(1).children">	<span class="context" ng-hide="point.class != 'activated'"> {{point.context}} </span>
+			{{point.text}} 
+		</span>
+	</div>
+	
+</div>
+<div class="column_outer">
+	<div class="column_inner">
+		<span class="{{point.class}}" ng-click="activate(point,2)" ng-repeat="point in panel_point(2).children">	<span class="context" ng-hide="point.class != 'activated'"> {{point.context}} </span>
+			{{point.text}} 
+		</span>
+	</div>
+</div>
+<div class="column_outer">
+	<div class="column_inner">
+		<span class="{{point.class}}" ng-click="activate(point,3)" ng-repeat="point in panel_point(3).children">	<span class="context" ng-hide="point.class != 'activated'"> {{point.context}} </span>
+			{{point.text}} 
+		</span>
+	</div>
+</div>
 

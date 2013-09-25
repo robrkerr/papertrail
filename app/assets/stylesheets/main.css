@@ -1,0 +1,70 @@
+
+/** {
+  padding:              0;
+  margin:               0;
+}*/
+
+/*html {
+  background:           white;
+}
+*/
+@font-face {
+  font-family:          Delicious;
+  src:                  url("delicious-123/Delicious-Roman.otf") format("opentype");
+}
+
+@font-face {
+  font-family:          Delicious;
+  font-weight:          bold;
+  src:                  url("delicious-123/Delicious-Bold.otf") format("opentype");
+}
+
+@font-face {
+  font-family:          Delicious;
+  font-weight:          900;
+  src:                  url("delicious-123/Delicious-Heavy.otf") format("opentype");
+}
+
+body {
+  font:                 18pt Delicious, "Myriad Pro", Helvetica;
+  /*height:               100%;*/
+  /*line-height:          30px;*/
+}
+
+input {
+  font:                 18pt Delicious, "Myriad Pro", Helvetica;
+}
+
+.column_outer {
+  display:              inline-block;
+  width:                32.5%;
+}
+
+.column_inner {
+  display:              inline-block;
+  padding:              5%;
+  width:                90%;
+  height:               500px;
+  vertical-align:       top;
+}
+
+.column_inner span:hover {
+  font-weight:          bold;
+}
+
+.column_inner span.activated {
+  font-weight:          bold;
+  display:              inline-block;
+  width:                100%;
+  margin-bottom:        15px;
+  margin-top:           15px;
+}
+
+.column_inner span.context {
+  font-weight:          normal;
+  font-size:            0.7em;
+  display:              inline-block;
+  width:                100%;
+  margin-bottom:        5px;
+  margin-top:           5px;
+}
