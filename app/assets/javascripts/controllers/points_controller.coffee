@@ -39,7 +39,7 @@ app.directive "pointlist", ($compile) ->
 				<button ng-click="remove_point(point)">x</button>
 				Point {{point.document_position}}: Used in {{point.num_instances}} place(s)
 				<select style="margin: 10px; display: block" ng-change="push_point_context(point)" ng-model="point.context_id" ng-options="c.id as c.description for c in contexts"></select>
-				<input style="margin: 10px; display: block; width: 300px" ng-blur="push_point_text(point)" type="text" ng-model="point.text"/>
+				<textarea style="margin: 10px; display: block" ng-blur="push_point_text(point)" type="text" ng-model="point.text"></textarea>
 				Subpoints:
 				<ul style="margin: 10px">
 					<li ng-repeat="subpoint in point.children">
@@ -71,6 +71,7 @@ app.directive "pointlist", ($compile) ->
 					$scope.load_points = () ->
 						$scope.document.all('points').getList().then (data) ->
 							$scope.points = data
+							console.log(data)
 							$scope.update_root_point()
 					$scope.load_points()
 					$scope.push_point_text = (point) ->

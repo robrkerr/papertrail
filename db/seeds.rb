@@ -19,3 +19,6 @@ Context.create([{ description: 'Title', position: 0 },
 								{ description: 'Figure', position: 6 },
 								{ description: 'Reference', position: 7 },
 								{ description: 'Comment', position: 8 }])
+
+## Example document
+load "#{Rails.root}/db/seed_example_document.rb"

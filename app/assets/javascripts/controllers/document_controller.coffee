@@ -44,4 +44,8 @@ app.controller "DocumentController", ($scope, $stateParams, Restangular) ->
 				c.class = ""
 				c
 			point.class = "activated"
+		$scope.jump_back = () ->
+			if $scope.panel_points.length > 1
+				$scope.panel_points[$scope.panel_points.length-1].class = ""
+				$scope.panel_points = $scope.panel_points.slice(0,$scope.panel_points.length-1)
 

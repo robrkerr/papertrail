@@ -33,6 +33,12 @@ body {
 
 input {
   font:                 18pt Delicious, "Myriad Pro", Helvetica;
+  width:                800px;
+}
+
+textarea {
+  font:                 18pt Delicious, "Myriad Pro", Helvetica;
+  width:                800px; 
 }
 
 .column_outer {
@@ -54,6 +60,13 @@ input {
 
 .column_inner span.activated {
   font-weight:          bold;
+  display:              inline-block;
+  width:                100%;
+  margin-bottom:        15px;
+  margin-top:           15px;
+}
+
+.column_inner span.Reference {
   display:              inline-block;
   width:                100%;
   margin-bottom:        15px;
