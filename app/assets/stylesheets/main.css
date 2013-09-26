@@ -52,6 +52,7 @@ textarea {
   width:                90%;
   height:               500px;
   vertical-align:       top;
+  line-height:          1em;
 }
 
 .column_inner span:hover {
