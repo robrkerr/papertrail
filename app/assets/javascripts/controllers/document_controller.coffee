@@ -27,25 +27,32 @@ app.controller "DocumentController", ($scope, $stateParams, Restangular) ->
 			  $scope.panel_points[panel-1]
 			else $scope.panel_points[$scope.panel_points.length-4+panel]
 		$scope.activate = (point,panel) ->
-			if ($scope.panel_points.length == panel) || (panel == 3)
-				$scope.panel_points.push(point)
-			else if $scope.panel_points.length <= 3
-				if $scope.panel_points.length == (panel+1)
-			  	$scope.panel_points[panel] = point
-				else
-					$scope.panel_points = $scope.panel_points.slice(0,panel+1)
-					$scope.panel_points[panel] = point
+			if point.class == "activated"
+				$scope.jump_back()
 			else
-				$scope.panel_points = $scope.panel_points.slice(0,$scope.panel_points.length-2+panel)
-				$scope.panel_points[$scope.panel_points.length-1] = point
-			$scope.retrieve_subpoints(point)
-			parent = $scope.panel_points[$scope.panel_points.length-2]
-			parent.children = parent.children.map (c) ->
-				c.class = ""
-				c
-			point.class = "activated"
+				if ($scope.panel_points.length == panel) || (panel == 3)
+					$scope.panel_points.push(point)
+				else if $scope.panel_points.length <= 3
+					if $scope.panel_points.length == (panel+1)
+				  	$scope.panel_points[panel] = point
+					else
+						$scope.panel_points = $scope.panel_points.slice(0,panel+1)
+						$scope.panel_points[panel] = point
+				else
+					$scope.panel_points = $scope.panel_points.slice(0,$scope.panel_points.length-2+panel)
+					$scope.panel_points[$scope.panel_points.length-1] = point
+				$scope.retrieve_subpoints(point)
+				parent = $scope.panel_points[$scope.panel_points.length-2]
+				parent.children = parent.children.map (c) ->
+					c.class = "deactivated"
+					c
+				point.class = "activated"
 		$scope.jump_back = () ->
 			if $scope.panel_points.length > 1
 				$scope.panel_points[$scope.panel_points.length-1].class = ""
 				$scope.panel_points = $scope.panel_points.slice(0,$scope.panel_points.length-1)
+				parent = $scope.panel_points[$scope.panel_points.length-1]
+				parent.children = parent.children.map (c) ->
+					c.class = ""
+					c
 

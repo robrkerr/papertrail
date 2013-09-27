@@ -3,13 +3,14 @@
 <div><a href="#/{{document.id}}/points"> Edit document points</a></div>
 <div><a href="#/"> Back to document list</a></div>
 
-<div><button ng-click="jump_back()">Jump back</button></div>
+<div><button class="in_text" ng-click="jump_back()">Jump back</button></div>
 
 <div class="column_outer">
 	<div class="column_inner">
 		<span class="{{point.class}} {{point.context}}" ng-click="activate(point,1)" ng-repeat="point in panel_point(1).children">	<span class="context" ng-hide="point.class != 'activated'"> {{point.context}} </span>
 			{{point.text}} 
 		</span>
+		<div><button class="in_text" ng-if="panel_points.length == 1">Add Comment</button></div>
 	</div>
 	
 </div>
@@ -18,6 +19,7 @@
 		<span class="{{point.class}} {{point.context}} " ng-click="activate(point,2)" ng-repeat="point in panel_point(2).children">	<span class="context" ng-hide="point.class != 'activated'"> {{point.context}} </span>
 			{{point.text}} 
 		</span>
+		<div><button class="in_text" ng-if="panel_points.length == 2">Add Comment</button></div>
 	</div>
 </div>
 <div class="column_outer">
@@ -25,6 +27,7 @@
 		<span class="{{point.class}} {{point.context}}" ng-click="activate(point,3)" ng-repeat="point in panel_point(3).children">	<span class="context" ng-hide="point.class != 'activated'"> {{point.context}} </span>
 			{{point.text}} 
 		</span>
+		<div><button class="in_text" ng-if="panel_points.length >= 3">Add Comment</button></div>
 	</div>
 </div>
 
