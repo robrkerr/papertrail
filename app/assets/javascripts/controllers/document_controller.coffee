@@ -55,4 +55,10 @@ app.controller "DocumentController", ($scope, $stateParams, Restangular) ->
 				parent.children = parent.children.map (c) ->
 					c.class = ""
 					c
+		$scope.add_comment = () ->
+			$scope.document.all('points').post({comment: $scope.panel_points[$scope.panel_points.length-1].new_comment}).then (data) ->
+				$scope.panel_points[$scope.panel_points.length-1].new_comment = ""
+				$scope.document.one('points',$scope.panel_points[$scope.panel_points.length-1].id).all('subpointlinks').post({subpoint_id: data.id}).then (data) ->
+						$scope.retrieve_subpoints($scope.panel_points[$scope.panel_points.length-1])
 
+			

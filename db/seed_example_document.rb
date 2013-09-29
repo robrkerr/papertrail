@@ -108,8 +108,7 @@ subpointlinks = [
 	}
 ]
 Subpointlink.create(subpointlinks)
-references = [
-	{text: "Markram H, Lubke J, Frotscher M, Sakmann B (1997) Regulation of synaptic efficacy by coincidence of postsynaptic APs and EPSPs. Science 275: 213-215. ", 
+references = [{text: "Markram H, Lubke J, Frotscher M, Sakmann B (1997) Regulation of synaptic efficacy by coincidence of postsynaptic APs and EPSPs. Science 275: 213-215. ", 
 					 	   context_id: Context.where(description: "Reference").first.id, 
 					     document_id: document_record.id,
 						   document_position: 17 },
@@ -150,6 +149,26 @@ subpointlinks = [{
 		point_id: some_subpoint_records[1].id,
 		subpoint_id: reference_records[4].id,
 		position: 3
+	}
+]
+Subpointlink.create(subpointlinks)
+comments = [{text: "The significance of this work needs to be further discussed. ",
+					 	 context_id: Context.where(description: "Comment").first.id, 
+					   document_id: document_record.id,
+						 document_position: 23 },
+						{text: "Good point. ", 
+					 	 context_id: Context.where(description: "Comment").first.id, 
+					   document_id: document_record.id,
+						 document_position: 22 }]
+comments_records = Point.create(comments)
+subpointlinks = [{
+		point_id: title_point_record.id,
+		subpoint_id: comments_records[0].id,
+		position: 10
+	}, {
+		point_id: some_subpoint_records[1].id,
+		subpoint_id: comments_records[1].id,
+		position: 4
 	}
 ]
 Subpointlink.create(subpointlinks)

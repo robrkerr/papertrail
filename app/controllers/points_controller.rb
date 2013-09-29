@@ -20,9 +20,16 @@ class PointsController < ApplicationController
   end
 
   def create
-  	new_point = Point.create({
-			text: "", 
-			context_id: Context.where(description: 'Result').first.id,
+  	if params[:comment]
+	  	text = params[:comment]
+	  	context_name = "Comment"
+	  else
+	  	text = ""
+	  	context_name = "Result"
+	  end
+	  new_point = Point.create({
+			text: text, 
+			context_id: Context.where(description: context_name).first.id,
 			document_id: params[:document_id],
 			document_position: Document.find(params[:document_id]).next_position
   	})

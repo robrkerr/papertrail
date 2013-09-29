@@ -29,6 +29,7 @@ body {
   font:                 16pt Delicious, "Myriad Pro", Helvetica;
   /*height:               100%;*/
   /*line-height:          30px;*/
+  box-sizing:           border-box;
 }
 
 input {
@@ -58,11 +59,16 @@ button.in_text {
   display:              inline-block;
   padding:              5%;
   width:                90%;
-  height:               500px;
+  height:               350px;
+  overflow-y:           scroll;
   vertical-align:       top;
   line-height:          1em;
   /*text-align:           justify;*/
   /*text-justify:         inter-word;*/
+}
+
+.column_inner span {
+  width:                100%;
 }
 
 .column_inner span:hover {
@@ -72,7 +78,6 @@ button.in_text {
 .column_inner span.activated {
   font-weight:          bold;
   display:              inline-block;
-  width:                100%;
   margin-bottom:        15px;
   margin-top:           15px;
 }
@@ -83,16 +88,28 @@ button.in_text {
 
 .column_inner span.Reference {
   display:              inline-block;
-  width:                100%;
   margin-bottom:        15px;
   margin-top:           15px;
+}
+
+.column_inner span.Comment {
+  display:              inline-block;
+  width:                95%;
+  margin-bottom:        15px;
+  margin-top:           15px;
+  padding:              10px;
+  border:               solid 1px blue;
+  background-color:     rgba(245,245,255,1.0);
 }
 
 .column_inner span.context {
   font-weight:          normal;
   font-size:            0.7em;
   display:              inline-block;
-  width:                100%;
   margin-bottom:        5px;
-  margin-top:           5px;
+}
+
+.comment_box {
+  display:              block;
+  width:                99%;
 }
