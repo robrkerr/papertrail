@@ -71,7 +71,6 @@ app.directive "pointlist", ($compile) ->
 					$scope.load_points = () ->
 						$scope.document.all('points').getList().then (data) ->
 							$scope.points = data
-							console.log(data)
 							$scope.update_root_point()
 					$scope.load_points()
 					$scope.push_point_text = (point) ->

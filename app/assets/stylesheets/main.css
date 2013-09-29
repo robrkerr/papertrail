@@ -4,10 +4,10 @@
   margin:               0;
 }*/
 
-/*html {
+html {
   background:           white;
 }
-*/
+
 @font-face {
   font-family:          Delicious;
   src:                  url("delicious-123/Delicious-Roman.otf") format("opentype");
@@ -40,6 +40,7 @@ input {
 textarea {
   font:                 16pt Delicious, "Myriad Pro", Helvetica;
   width:                800px; 
+  resize:               vertical;
 }
 
 button {
@@ -47,7 +48,7 @@ button {
 }
 
 button.in_text {
-  margin:               30px 0px; 
+  margin:               15px 0px; 
 }
 
 .column_outer {
@@ -62,7 +63,7 @@ button.in_text {
   height:               350px;
   overflow-y:           scroll;
   vertical-align:       top;
-  line-height:          1em;
+  line-height:          24px;
   /*text-align:           justify;*/
   /*text-justify:         inter-word;*/
 }
@@ -102,6 +103,12 @@ button.in_text {
   background-color:     rgba(245,245,255,1.0);
 }
 
+.column_inner span.Equation {
+  display:              inline-block;
+  margin-bottom:        15px;
+  margin-top:           15px;
+}
+
 .column_inner span.context {
   font-weight:          normal;
   font-size:            0.7em;
@@ -112,4 +119,11 @@ button.in_text {
 .comment_box {
   display:              block;
   width:                99%;
+  margin-top:           15px;
+}
+
+.Equation_inner {
+  display:              inline-block;
+  font-size:            0.75em;
+  text-align:           center;
 }

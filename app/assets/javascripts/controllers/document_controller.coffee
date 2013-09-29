@@ -2,6 +2,13 @@
 
 app = angular.module 'papertrailApp'
 
+app.directive "mathjaxBind", ->
+  restrict: "A"
+  controller: ($scope, $element, $attrs) -> 
+  	$scope.$watch $attrs.mathjaxBind, (value) ->
+      $element.text (if value is `undefined` then "" else value)
+      MathJax.Hub.Queue ["Typeset", MathJax.Hub, $element[0]]
+
 app.controller "DocumentController", ($scope, $stateParams, Restangular) ->
 	Restangular.setRequestSuffix(".json")
 	Restangular.all('contexts').getList().then (data) ->
@@ -60,5 +67,6 @@ app.controller "DocumentController", ($scope, $stateParams, Restangular) ->
 				$scope.panel_points[$scope.panel_points.length-1].new_comment = ""
 				$scope.document.one('points',$scope.panel_points[$scope.panel_points.length-1].id).all('subpointlinks').post({subpoint_id: data.id}).then (data) ->
 						$scope.retrieve_subpoints($scope.panel_points[$scope.panel_points.length-1])
+
 
 			

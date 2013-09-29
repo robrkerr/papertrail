@@ -172,3 +172,73 @@ subpointlinks = [{
 	}
 ]
 Subpointlink.create(subpointlinks)
+method_subpoints = [{
+		text: "Our analytical work used the Poisson neuron model. ", 
+		context_id: Context.where(description: "Method").first.id, 
+		document_id: document_record.id,
+		document_position: 23 
+	}, {
+		text: "Kempter R, Gerstner W, van Hemmen JL (1999) Hebbian learning and spiking neurons. Phys Rev E 59: 4498-4514. ", 
+		context_id: Context.where(description: "Reference").first.id, 
+		document_id: document_record.id,
+		document_position: 24 
+	}, {
+		text: "This is a stochastic model which outputs a spike train that is a realization of an inhomogeneous Poisson process. ", 
+		context_id: Context.where(description: "Method").first.id, 
+		document_id: document_record.id,
+		document_position: 25 
+	}, {
+		text: "The intensity function for the \\(i\\)th neuron at time \\(t\\) is given by \\(\\lambda_i(t)\\). ", 
+		context_id: Context.where(description: "Method").first.id, 
+		document_id: document_record.id,
+		document_position: 26 
+	}, {
+		text: "\\(\\lambda_i(t) = \\nu_0 + \\displaystyle\\sum\\limits_{j \\neq i} J_{ij}(t) \\displaystyle\\sum\\limits_{n} \\epsilon(t - t_{j,n} - d^\\text{ax}_{ij} - d^\\text{den}_{ij})\\)", 
+		context_id: Context.where(description: "Equation").first.id, 
+		document_id: document_record.id,
+		document_position: 27 
+	}, {
+		text: "This quantity is analogous to the membrane potential of the neuron. ", 
+		context_id: Context.where(description: "Method").first.id, 
+		document_id: document_record.id,
+		document_position: 28 
+	}, {
+		text: "It is made up of a spontaneous rate and the weighted sum of post-synaptic response kernels. ", 
+		context_id: Context.where(description: "Method").first.id, 
+		document_id: document_record.id,
+		document_position: 29 
+	}]
+method_subpoint_records = Point.create(method_subpoints)
+subpointlinks = [{
+		point_id: main_point_records[4].id,
+		subpoint_id: method_subpoint_records[0].id,
+		position: 0
+	}, {
+		point_id: method_subpoint_records[0].id,
+		subpoint_id: method_subpoint_records[2].id,
+		position: 0
+	}, {
+		point_id: method_subpoint_records[0].id,
+		subpoint_id: method_subpoint_records[3].id,
+		position: 1
+	}, {
+		point_id: method_subpoint_records[3].id,
+		subpoint_id: method_subpoint_records[4].id,
+		position: 0
+	}, {
+		point_id: method_subpoint_records[3].id,
+		subpoint_id: method_subpoint_records[6].id,
+		position: 1
+	}, {
+		point_id: method_subpoint_records[0].id,
+		subpoint_id: method_subpoint_records[5].id,
+		position: 1
+	}, {
+		point_id: method_subpoint_records[0].id,
+		subpoint_id: method_subpoint_records[1].id,
+		position: 2
+	}
+]
+Subpointlink.create(subpointlinks)
+
+	# $\nu_0$ is the spontaneous rate (assumed to be zero in this study), $J_{ij}(t)$ is the synaptic weight from neuron $j$ to neuron $i$, $\epsilon(t)$ is the post-synaptic response kernel, or excitatory post-synaptic potential (EPSP) kernel, $t_{j,n}$ is the time of the $n$th spike output by neuron $j$, and $d^\text{ax}_{ij}$ and $d^\text{den}_{ij}$ are the axonal and dendritic delays, respectively, from neuron $j$ to neuron $i$. Synapses here are modeled as current based. This means that synaptic input into the neuron is independent of the neuron's membrane potential (the intensity function in this model).

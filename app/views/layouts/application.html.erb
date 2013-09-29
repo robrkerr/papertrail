@@ -9,13 +9,14 @@
 
 <div ui-view></div>
 
-
 <!-- build:js scripts/vendor.js -->
 <!-- bower:js -->
 <%= javascript_include_tag "angular/angular.min.js" %>
 <%= javascript_include_tag "angular-ui-router/release/angular-ui-router.min.js" %>
 <%= javascript_include_tag "restangular/dist/restangular.min.js" %>
 <%= javascript_include_tag "lodash/dist/lodash.min.js" %>
+<%= javascript_include_tag "http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" %>
+</script>
 <!-- endbower -->
 <!-- endbuild -->
 
