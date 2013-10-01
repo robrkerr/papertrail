@@ -1,51 +1,21 @@
-<h3> Document Title: <input ng-blur="push_title()" type="text" ng-model="document_title"> </h3>
+<h3> {{document_title}} </h3>
 
 <div><a href="#/{{document.id}}/points"> Edit document points</a></div>
 <div><a href="#/"> Back to document list</a></div>
 
 <div><button class="in_text" ng-click="jump_back()">Jump back</button></div>
 
-<div class="column_outer">
+<div class="column_outer" style="width: {{100/(panels.length) - 1}}%" ng-repeat="panel in panels">
 	<div class="column_inner">
-		<span class="{{point.class}} {{point.context}}" ng-click="activate(point,1)" ng-repeat="point in panel_point(1).children">
+		<span class="{{point.class}} {{point.context}}" ng-click="activate(point,panel)" ng-repeat="point in panel_point(panel).children">
 			<span class="context" ng-hide="point.class != 'activated'"> 
 				{{point.context}}
 			</span>
 			<span class="{{point.context}}_inner" mathjax-bind="point.text"></span>
 		</span>
-		<div ng-if="panel_points.length == 1">
-			<textarea class="comment_box" type="text" ng-model="panel_points[panel_points.length-1].new_comment"></textarea>
-			<button class="in_text" ng-click="add_comment()">Add Comment</button>
-		</div>
-	</div>
-	
-</div>
-<div class="column_outer">
-	<div class="column_inner">
-		<span class="{{point.class}} {{point.context}} " ng-click="activate(point,2)" ng-repeat="point in panel_point(2).children">	
-			<span class="context" ng-hide="point.class != 'activated'"> 
-				{{point.context}} 
-			</span>
-			<span class="{{point.context}}_inner" mathjax-bind="point.text"></span>
-		</span>
-		<div ng-if="panel_points.length == 2">
+		<div ng-if="(panel_points.length == panel) || ((panel == panels.length) && (panel_points.length > panel))">
 			<textarea class="comment_box" type="text" ng-model="panel_points[panel_points.length-1].new_comment"></textarea>
 			<button class="in_text" ng-click="add_comment()">Add Comment</button>
 		</div>
 	</div>
 </div>
-<div class="column_outer">
-	<div class="column_inner">
-		<span class="{{point.class}} {{point.context}}" ng-click="activate(point,3)" ng-repeat="point in panel_point(3).children">
-			<span class="context" ng-hide="point.class != 'activated'"> 
-				{{point.context}} 
-			</span> 
-			<span class="{{point.context}}_inner" mathjax-bind="point.text"></span>
-		</span>
-		<div ng-if="panel_points.length >= 3">
-			<textarea class="comment_box" type="text" ng-model="panel_points[panel_points.length-1].new_comment"></textarea>
-			<button class="in_text" ng-click="add_comment()">Add Comment</button>
-		</div>
-	</div>
-</div>
-

@@ -22,7 +22,7 @@ app.directive "pointlist", ($compile) ->
   restrict: "E"
   template: """
   	<ul>
-			<li>
+			<li class="editable_point">
 				Main points:
 				<ul style="margin: 10px">
 					<li ng-repeat="subpoint in rootpoint.children">
@@ -35,24 +35,28 @@ app.directive "pointlist", ($compile) ->
 					</li>
 				</ul>
 			</li>
-			<li ng-repeat="point in points">
+			<li class="editable_point" ng-repeat="point in points">
+				<input class="checkbox" type="checkbox" name="point_check" ng-model="point.open"></input>
 				<button ng-click="remove_point(point)">x</button>
-				Point {{point.document_position}}: Used in {{point.num_instances}} place(s)
-				<select style="margin: 10px; display: block" ng-change="push_point_context(point)" ng-model="point.context_id" ng-options="c.id as c.description for c in contexts"></select>
+				Point {{point.document_position}}: 
+				<select ng-change="push_point_context(point)" ng-model="point.context_id" ng-options="c.id as c.description for c in contexts"></select>
+				Used in {{point.num_instances}} place(s), Has {{point.children.length}} child(ren)
 				<textarea style="margin: 10px; display: block" ng-blur="push_point_text(point)" type="text" ng-model="point.text"></textarea>
-				Subpoints:
-				<ul style="margin: 10px">
-					<li ng-repeat="subpoint in point.children">
-						<button ng-click="remove_subpoint(point,subpoint)">x</button>
-						Point {{subpoint.document_position}}:
-						({{subpoint.context}}) {{subpoint.text}}
-					</li>
-					<li>
-						Add link to point: <select ng-change="add_subpoint(point)" ng-model="point.new_child" ng-options="sub as sub.document_position for sub in point.all_possible_children"></select>
-					</li>
-				</ul>
+				<div ng-if="point.open">
+					Subpoints:
+					<ul style="margin: 10px">
+						<li ng-repeat="subpoint in point.children">
+							<button ng-click="remove_subpoint(point,subpoint)">x</button>
+							Point {{subpoint.document_position}}:
+							({{subpoint.context}}) {{subpoint.text}}
+						</li>
+						<li>
+							Add link to point: <select ng-change="add_subpoint(point)" ng-model="point.new_child" ng-options="sub as sub.document_position for sub in point.all_possible_children"></select>
+						</li>
+					</ul>
+				</div>
 			</li>
-			<li>
+			<li class="editable_point">
 				<button ng-click="create_point()">New point</button>
 			</li>
 		</ul>

@@ -5,7 +5,34 @@
 }*/
 
 html {
+  /*background:           rgba(255,254.5,254,1.0);*/
   background:           white;
+  height:               100%;
+  box-sizing:           border-box;
+}
+
+.background {
+  width:                100%;
+  height:               110%;
+  top:                  0px;
+  left:                 0px;
+  position:             absolute;
+  /*background-image:     url(http://www.unsigneddesign.com/Seamless_background_textures/1200px/seamlesstexture6_1200.jpg);*/
+  /*background-image:     url(images/paper_background.jpg);*/
+  background-image:     url(images/seamlesstexture6_1200.jpg);
+  background-size:      cover;
+  opacity:              0.08;
+  z-index:              -10;
+}
+
+body {
+  font:                 16pt Delicious, "Myriad Pro", Helvetica;
+  height:               95%;
+  /*margin:               0px;*/
+}
+
+.uiview {
+  height:               100%; 
 }
 
 @font-face {
@@ -25,14 +52,7 @@ html {
   src:                  url("delicious-123/Delicious-Heavy.otf") format("opentype");
 }
 
-body {
-  font:                 16pt Delicious, "Myriad Pro", Helvetica;
-  /*height:               100%;*/
-  /*line-height:          30px;*/
-  box-sizing:           border-box;
-}
-
-input {
+input.title {
   font:                 16pt Delicious, "Myriad Pro", Helvetica;
   width:                800px;
 }
@@ -41,9 +61,15 @@ textarea {
   font:                 16pt Delicious, "Myriad Pro", Helvetica;
   width:                800px; 
   resize:               vertical;
+  background:           rgba(255,254.5,254,1.0);
 }
 
 button {
+  font:                 15pt Delicious, "Myriad Pro", Helvetica;
+}
+
+select {
+  border:               none;
   font:                 16pt Delicious, "Myriad Pro", Helvetica;
 }
 
@@ -54,18 +80,19 @@ button.in_text {
 .column_outer {
   display:              inline-block;
   width:                32.5%;
+  height:               (100% - 20%);
 }
 
 .column_inner {
   display:              inline-block;
-  padding:              5%;
-  width:                90%;
-  height:               350px;
+  padding:              10px 20px 10px;
+  width:                95%;
+  /*height:               350px;*/
+  height:               100%;
   overflow-y:           scroll;
   vertical-align:       top;
   line-height:          24px;
-  /*text-align:           justify;*/
-  /*text-justify:         inter-word;*/
+  text-align:           justify;
 }
 
 .column_inner span {
@@ -78,7 +105,7 @@ button.in_text {
 
 .column_inner span.activated {
   font-weight:          bold;
-  display:              inline-block;
+  display:              block;
   margin-bottom:        15px;
   margin-top:           15px;
 }
@@ -88,23 +115,24 @@ button.in_text {
 }
 
 .column_inner span.Reference {
-  display:              inline-block;
+  display:              block;
   margin-bottom:        15px;
   margin-top:           15px;
 }
 
 .column_inner span.Comment {
-  display:              inline-block;
+  display:              block;
   width:                95%;
   margin-bottom:        15px;
   margin-top:           15px;
   padding:              10px;
+  font-size:            0.9em;
   border:               solid 1px blue;
   background-color:     rgba(245,245,255,1.0);
 }
 
 .column_inner span.Equation {
-  display:              inline-block;
+  display:              block;
   margin-bottom:        15px;
   margin-top:           15px;
 }
@@ -112,7 +140,7 @@ button.in_text {
 .column_inner span.context {
   font-weight:          normal;
   font-size:            0.7em;
-  display:              inline-block;
+  display:              block;
   margin-bottom:        5px;
 }
 
@@ -123,7 +151,11 @@ button.in_text {
 }
 
 .Equation_inner {
-  display:              inline-block;
+  display:              block;
   font-size:            0.75em;
   text-align:           center;
+}
+
+.editable_point {
+  padding:              20px 0px;
 }
