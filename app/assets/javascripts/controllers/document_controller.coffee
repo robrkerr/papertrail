@@ -9,12 +9,22 @@ app.directive "mathjaxBind", ->
       $element.text (if value is `undefined` then "" else value)
       MathJax.Hub.Queue ["Typeset", MathJax.Hub, $element[0]]
 
-app.controller "DocumentController", ($scope, $stateParams, Restangular) ->
+app.controller "DocumentController", ($scope, $window, $stateParams, Restangular) ->
 	Restangular.setRequestSuffix(".json")
 	Restangular.all('contexts').getList().then (data) ->
 		$scope.contexts = data
 	$scope.document = Restangular.one('documents',$stateParams.document_id)
-	$scope.panels = [1,2,3]
+	$scope.set_panels = (width) ->
+		if width > 1300
+			$scope.panels = [1,2,3]
+		else if width > 800
+			$scope.panels = [1,2]
+		else
+			$scope.panels = [1]
+	$scope.set_panels($window.innerWidth)
+	$window.onresize = () ->
+    $scope.set_panels($window.innerWidth)
+    $scope.$apply()
 	$scope.document.get().then (data) ->
 		$scope.document_title = data.title.text
 		$scope.title_point = $scope.document.one('points',data.title.id)
