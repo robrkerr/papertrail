@@ -14,16 +14,10 @@ app.controller "DocumentController", ($scope, $window, $stateParams, Restangular
 	Restangular.all('contexts').getList().then (data) ->
 		$scope.contexts = data
 	$scope.document = Restangular.one('documents',$stateParams.document_id)
-	$scope.set_panels = (width) ->
-		if width > 1300
-			$scope.panels = [1,2,3]
-		else if width > 800
-			$scope.panels = [1,2]
-		else
-			$scope.panels = [1]
-	$scope.set_panels($window.innerWidth)
+	$scope.num_panels = 2
+	$scope.panel_width = ($window.innerWidth-20)/$scope.num_panels
 	$window.onresize = () ->
-    $scope.set_panels($window.innerWidth)
+    $scope.panel_width = ($window.innerWidth-20)/$scope.num_panels
     $scope.$apply()
 	$scope.document.get().then (data) ->
 		$scope.document_title = data.title.text
@@ -36,29 +30,16 @@ app.controller "DocumentController", ($scope, $window, $stateParams, Restangular
 				point.children = data.children
 				$scope.set_children_class(point,"")
 				point.context = data.context
-		$scope.panel_point = (panel) ->
-			if $scope.panel_points.length <= $scope.panels.length
-			  $scope.panel_points[panel-1]
-			else $scope.panel_points[$scope.panel_points.length-$scope.panels.length-1+panel]
 		$scope.activate = (point,panel) ->
-			if point.class == "activated"
-				$scope.jump_back()
+			if ($scope.panel_points.length == panel)
+				$scope.panel_points.push(point)
 			else
-				if ($scope.panel_points.length == panel) || (panel == $scope.panels.length)
-					$scope.panel_points.push(point)
-				else if $scope.panel_points.length <= $scope.panels.length
-					if $scope.panel_points.length == (panel+1)
-				  	$scope.panel_points[panel] = point
-					else
-						$scope.panel_points = $scope.panel_points.slice(0,panel+1)
-						$scope.panel_points[panel] = point
-				else
-					$scope.panel_points = $scope.panel_points.slice(0,$scope.panel_points.length-$scope.panels.length+1+panel)
-					$scope.panel_points[$scope.panel_points.length-1] = point
-				$scope.retrieve_subpoints(point)
-				parent = $scope.panel_points[$scope.panel_points.length-2]
-				$scope.set_children_class(parent,"deactivated")
-				point.class = "activated"
+				$scope.panel_points = $scope.panel_points.slice(0,panel+1)
+				$scope.panel_points[panel] = point
+			$scope.retrieve_subpoints(point)
+			parent = $scope.panel_points[$scope.panel_points.length-2]
+			$scope.set_children_class(parent,"deactivated")
+			point.class = "activated"
 		$scope.jump_back = () ->
 			if $scope.panel_points.length > 1
 				$scope.panel_points[$scope.panel_points.length-1].class = ""
