@@ -15,7 +15,15 @@ class Point < ActiveRecord::Base
 				subpointlink_position: link.position,
 			}) 
 		}
+		full_parents = parentpointlinks.map { |link| 
+			link.point.attributes.merge({
+				context: link.point.context.description,
+				subpointlink_id: link.id,
+				subpointlink_position: link.position,
+			}) 
+		}
 		attributes.merge({children: full_subpoints, 
+											parents: full_parents, 
 			   							context: context.description,
 			   							all_possible_children: all_possible_children,
 			   							num_instances: num_instances})

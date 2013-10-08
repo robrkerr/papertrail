@@ -79,14 +79,21 @@ button.in_text {
 
 .column_container {
   position:             absolute;
-  -webkit-transition:   left 0.25s;
-  transition:           left 0.25s;
+  height:               (100% - 20%);
 }
 
 .column_outer {
   display:              inline-block;
   width:                32.5%;
+  height:               100%;
+}
+
+.parent_column {
+  position:             absolute;
+  width:                32.5%;
   height:               (100% - 20%);
+  background-color:     white;
+  z-index:              10;
 }
 
 .column_inner {

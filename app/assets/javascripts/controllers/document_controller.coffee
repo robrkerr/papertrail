@@ -15,6 +15,7 @@ app.controller "DocumentController", ($scope, $window, $stateParams, Restangular
 		$scope.contexts = data
 	$scope.document = Restangular.one('documents',$stateParams.document_id)
 	$scope.num_panels = 2
+	$scope.parent_shift = 1;
 	$scope.panel_width = ($window.innerWidth-20)/$scope.num_panels
 	$window.onresize = () ->
     $scope.panel_width = ($window.innerWidth-20)/$scope.num_panels
@@ -28,6 +29,7 @@ app.controller "DocumentController", ($scope, $window, $stateParams, Restangular
 		$scope.retrieve_subpoints = (point) ->
 			$scope.document.one('points',point.id).get().then (data) ->
 				point.children = data.children
+				point.parents = data.parents
 				$scope.set_children_class(point,"")
 				point.context = data.context
 		$scope.activate = (point,panel) ->
@@ -44,8 +46,16 @@ app.controller "DocumentController", ($scope, $window, $stateParams, Restangular
 			if $scope.panel_points.length > 1
 				$scope.panel_points[$scope.panel_points.length-1].class = ""
 				$scope.panel_points = $scope.panel_points.slice(0,$scope.panel_points.length-1)
+				if $scope.panel_points.length <= 2
+					$scope.parent_shift = 1;
 				parent = $scope.panel_points[$scope.panel_points.length-1]
 				$scope.set_children_class(parent,"")
+		$scope.see_parents = () ->
+			if $scope.parent_shift == 1
+				$scope.parent_shift = 0
+		$scope.see_children = () ->
+			if $scope.parent_shift == 0
+				$scope.parent_shift = 1
 		$scope.add_comment = () ->
 			$scope.document.all('points').post({comment: $scope.panel_points[$scope.panel_points.length-1].new_comment}).then (data) ->
 				$scope.panel_points[$scope.panel_points.length-1].new_comment = ""

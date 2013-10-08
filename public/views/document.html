@@ -3,9 +3,29 @@
 <div><a href="#/{{document.id}}/points"> Edit document points</a></div>
 <div><a href="#/"> Back to document list</a></div>
 
-<div><button class="in_text" ng-click="jump_back()">Jump back</button></div>
+<div>
+	<button class="in_text" ng-click="jump_back()">Jump back</button>
+	<button class="in_text" ng-click="see_parents()" ng-if="(parent_shift == 1) && (panel_points.length > 2)">See parents</button>
+	<button class="in_text" ng-click="see_children()" ng-if="parent_shift == 0">See children</button>
+</div>
 
-<div class="column_container" style="left: {{(num_panels-panel_points.length)*panel_width}}px">
+<div class="parent_column" ng-if="parent_shift == 0" style="width: {{panel_width}}px">
+	<div class="column_inner">
+		<span class="{{point.class}} {{point.context}}" ng-repeat="point in panel_points[panel_points.length-1].parents">
+				<span class="context"> 
+					{{point.context}}
+				</span>
+				<span class="{{point.context}}_inner" mathjax-bind="point.text"></span>
+			</span>
+	</div>
+</div>
+<div class="column_container" style="left: {{(num_panels-parent_shift-panel_points.length)*panel_width}}px">
+	<div class="column_outer" style="width: {{panel_width}}px">
+		<div class="column_inner">
+			<h3>Abstract →</h3>
+			Click on different sections for further details. 
+		</div>
+	</div>
 	<div class="column_outer" style="width: {{panel_width}}px" ng-repeat="panel in panel_points">
 		<div class="column_inner">
 			<span class="{{point.class}} {{point.context}}" ng-click="activate(point,$parent.$index+1)" ng-repeat="point in panel.children">
