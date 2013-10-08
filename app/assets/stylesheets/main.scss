@@ -80,6 +80,8 @@ button.in_text {
 .column_container {
   position:             absolute;
   height:               (100% - 20%);
+  -webkit-transition:   left 0.25s;
+  transition:           left 0.25s;
 }
 
 .column_outer {
@@ -94,6 +96,8 @@ button.in_text {
   height:               (100% - 20%);
   background-color:     white;
   z-index:              10;
+  -webkit-transition:   left 0.25s;
+  transition:           left 0.25s;
 }
 
 .column_inner {
