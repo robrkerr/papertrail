@@ -37,19 +37,18 @@ class Point < ActiveRecord::Base
 	end
 
 	def all_possible_children
-		### Definitely these criteria
-		# - only points with the same document
-		# - not this point
-		# - not the title point
 		title_context_id = Context.where(description: "Title").first.id
-		Point.where("document_id = ? AND id != ? AND context_id != ?",document_id,id,title_context_id)
-		### Maybe these criteria
-		# - not points that are already children?
-		# - not points that are parents/grandparents/etc of this point?
+		possible_children = Point.where("document_id = ? AND id != ? AND context_id != ?",document_id,id,title_context_id)
+		possible_children.select { |pnt| !descended_from(pnt) } ## to prevent loops from occuring
 	end
 
 	def num_instances
-		parentpointlinks.count
+		return 1 if id == document.root_point.id
+		parentpointlinks.inject(0) { |sum,link| sum + link.point.num_instances }
+	end
+
+	def descended_from point
+		parentpointlinks.any? { |link| link.point.id == point.id || link.point.descended_from(point) }
 	end
 
 end

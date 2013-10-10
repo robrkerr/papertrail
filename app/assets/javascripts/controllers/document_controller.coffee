@@ -49,12 +49,13 @@ app.controller "DocumentController", ($scope, $window, $stateParams, Restangular
 			$scope.set_children_class(parent,"deactivated")
 			point.class = "activated"
 		$scope.select_as_parent = (point,ind) ->
-			$scope.panel_points[$scope.panel_points.length-1-ind] = point
-			$scope.document.one('points',point.id).get().then (data) ->
-				if data.parents.length > 0
-					$scope.select_as_parent(data.parents[0],ind+1)
-				else
-					$scope.activate_new_branch($scope.panel_points.length-ind)
+			if point.instances > 0
+				$scope.panel_points[$scope.panel_points.length-1-ind] = point
+				$scope.document.one('points',point.id).get().then (data) ->
+					if data.parents.length > 0
+						$scope.select_as_parent(data.parents[0],ind+1)
+					else
+						$scope.activate_new_branch($scope.panel_points.length-ind)
 		$scope.activate_new_branch = (ind) ->
 			if ind < $scope.panel_points.length
 				$scope.document.one('points',$scope.panel_points[ind-1].id).get().then (data) ->
@@ -70,7 +71,7 @@ app.controller "DocumentController", ($scope, $window, $stateParams, Restangular
 							$scope.panel_points[ind] = value
 					angular.forEach $scope.panel_points[ind-1].parents, (value) ->
 						if value.id == $scope.panel_points[ind-2].id
-							$scope.panel_points[ind-2].class = "activated"
+							value.class = "activated"
 					$scope.activate_new_branch(ind+1)
 			else if ind == $scope.panel_points.length
 				$scope.document.one('points',$scope.panel_points[ind-1].id).get().then (data) ->
@@ -80,15 +81,15 @@ app.controller "DocumentController", ($scope, $window, $stateParams, Restangular
 					$scope.panel_points[ind-1].context = data.context
 					angular.forEach $scope.panel_points[ind-1].parents, (value) ->
 						if value.id == $scope.panel_points[ind-2].id
-							$scope.panel_points[ind-2].class = "activated"
+							value.class = "activated"
 		$scope.jump_back = () ->
 			if $scope.panel_points.length > 1
 				$scope.panel_points[$scope.panel_points.length-1].class = ""
 				$scope.panel_points = $scope.panel_points.slice(0,$scope.panel_points.length-1)
-				if $scope.panel_points.length <= 2
-					$scope.parent_shift = 1;
 				parent = $scope.panel_points[$scope.panel_points.length-1]
 				$scope.set_children_class(parent,"")
+				if $scope.panel_points.length <= 2
+					$scope.parent_shift = 1
 		$scope.see_parents = () ->
 			if $scope.parent_shift == 1
 				$scope.parent_shift = 0

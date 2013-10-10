@@ -40,7 +40,7 @@ app.directive "pointlist", ($compile) ->
 				<button ng-click="remove_point(point)">x</button>
 				Point {{point.document_position}}: 
 				<select ng-change="push_point_context(point)" ng-model="point.context_id" ng-options="c.id as c.description for c in contexts"></select>
-				Used in {{point.num_instances}} place(s), Has {{point.children.length}} child(ren)
+				Used in {{point.instances}} place(s), Has {{point.children.length}} child(ren)
 				<textarea style="margin: 10px; display: block" ng-blur="push_point_text(point)" type="text" ng-model="point.text"></textarea>
 				<div ng-if="point.open">
 					Subpoints:

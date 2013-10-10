@@ -7,12 +7,18 @@ class SubpointlinksController < ApplicationController
 
 	def create
 		point = Point.find(params[:point_id])
-		subpointlink = Subpointlink.create({point_id: point.id, 
-																  			subpoint_id: params[:subpoint_id],
-												 								position: point.next_child_position})
-		respond_to do |format|
-      format.json { render :json => subpointlink.to_json }
-    end
+		if point.descended_from(Point.find(params[:subpoint_id]))
+			respond_to do |format|
+	      format.json { render :json => [].to_json }
+	    end
+		else
+			subpointlink = Subpointlink.create({point_id: point.id, 
+																	  			subpoint_id: params[:subpoint_id],
+													 								position: point.next_child_position})
+			respond_to do |format|
+	      format.json { render :json => subpointlink.to_json }
+	    end
+	  end
 	end
 
 	def destroy
