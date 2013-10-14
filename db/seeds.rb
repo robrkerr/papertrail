@@ -22,4 +22,7 @@ Context.create([{ description: 'Title', position: 0 },
 								{ description: 'Comment', position: 9 }])
 
 ## Example document
-load "#{Rails.root}/db/seed_example_document.rb"
+require "#{Rails.root}/db/document_importer.rb"
+importer = DocumentImporter.new
+importer.import("#{Rails.root}/data/example_doc1.txt")
+# load "#{Rails.root}/db/seed_example_document.rb"

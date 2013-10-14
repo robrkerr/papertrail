@@ -9,6 +9,19 @@ app.directive "mathjaxBind", ->
       $element.text (if value is `undefined` then "" else value)
       MathJax.Hub.Queue ["Typeset", MathJax.Hub, $element[0]]
 
+app.directive "pointHeader", ->
+  restrict: "A"
+  scope:
+  	point: "=pointHeader"
+  controller: ($scope, $element, $attrs) ->
+  	$scope.pluralize = (number, singular, plural) ->
+				"#{number} " + (if number == 1 then singular else plural)
+  template: """
+  		{{point.context}}
+  		(Appears in {{pluralize(point.instances,"place","places")}},
+  		Has {{pluralize(point.children.length,"child","children")}})
+  	"""
+
 app.controller "DocumentController", ($scope, $window, $stateParams, Restangular) ->
 	Restangular.setRequestSuffix(".json")
 	Restangular.all('contexts').getList().then (data) ->
@@ -109,8 +122,3 @@ app.controller "DocumentController", ($scope, $window, $stateParams, Restangular
 			point.parents = point.parents.map (p) ->
 					p.class = class_str
 					p
-		$scope.pluralize = (number, singular, plural) ->
-			if number == 1
-				"#{number} " + singular
-			else 
-				"#{number} " + plural

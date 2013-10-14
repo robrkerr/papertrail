@@ -1,22 +1,22 @@
-<h3> {{document_title}} </h3>
+<div class="top_panel">
+	<h3> {{document_title}} </h3>
 
-<div><a href="#/{{document.id}}/points"> Edit document points</a></div>
-<div><a href="#/"> Back to document list</a></div>
+	<div><a href="#/{{document.id}}/points">Edit document points</a></div>
+	<div><a href="#/">Back to document list</a></div>
 
-<div>
-	<button class="in_text" ng-click="jump_back()">Jump back</button>
-	<button class="in_text" ng-click="see_parents()" ng-if="(parent_shift == 1) && (panel_points.length > 2)">See parents</button>
-	<button class="in_text" ng-click="see_children()" ng-if="parent_shift == 0">See children</button>
+	<div>
+		<button class="in_text" ng-click="jump_back()">Jump back</button>
+		<button class="in_text" ng-click="see_parents()" ng-if="(parent_shift == 1) && (panel_points.length > 2)">See parents</button>
+		<button class="in_text" ng-click="see_children()" ng-if="parent_shift == 0">See children</button>
+	</div>
 </div>
 
 <div class="parent_column" style="width: {{panel_width}}px; left: {{-parent_shift*panel_width}}px">
 	<div class="column_inner">
-		<span class="{{point.class}} Reference" ng-click="select_as_parent(point,1)" ng-repeat="point in panel_points[panel_points.length-1].parents">
-				<span class="context"> 
-					{{point.context}} (Appears in {{pluralize(point.instances,"place","places")}})
-				</span>
-				<span class="Reference_inner" mathjax-bind="point.text"></span>
-			</span>
+		<span class="pointbox {{point.class}} {{point.context}}" ng-click="select_as_parent(point,1)" ng-repeat="point in panel_points[panel_points.length-1].parents">
+			<span class="{{point.class}} context" point-header="point"></span>
+			<span class="{{point.context}}_inner" mathjax-bind="point.text"></span>
+		</span>
 	</div>
 </div>
 <div class="column_container" style="left: {{(num_panels-parent_shift-panel_points.length)*panel_width}}px">
@@ -28,10 +28,8 @@
 	</div>
 	<div class="column_outer" style="width: {{panel_width}}px" ng-repeat="panel in panel_points">
 		<div class="column_inner">
-			<span class="{{point.class}} {{point.context}}" ng-click="activate(point,$parent.$index+1)" ng-repeat="point in panel.children">
-				<span class="context" ng-hide="point.class != 'activated'"> 
-					{{point.context}} (Appears in {{pluralize(point.instances,"place","places")}})
-				</span>
+			<span class="pointbox {{point.class}} {{point.context}}" ng-click="activate(point,$parent.$index+1)" ng-repeat="point in panel.children">
+				<span class="{{point.class}} context" point-header="point"></span>
 				<span class="{{point.context}}_inner" mathjax-bind="point.text"></span>
 			</span>
 			<div ng-if="(panel_points.length == $index+1)">

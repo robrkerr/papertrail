@@ -12,6 +12,7 @@ class Point < ActiveRecord::Base
 			link.subpoint.attributes.merge({
 				context: link.subpoint.context.description,
 				instances: link.subpoint.num_instances,
+				children: link.subpoint.subpoints,
 				subpointlink_id: link.id,
 				subpointlink_position: link.position,
 			}) 
@@ -20,6 +21,7 @@ class Point < ActiveRecord::Base
 			link.point.attributes.merge({
 				context: link.point.context.description,
 				instances: link.point.num_instances,
+				children: link.point.subpoints,
 				subpointlink_id: link.id,
 				subpointlink_position: link.position,
 			}) 
