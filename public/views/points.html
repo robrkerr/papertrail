@@ -1,10 +1,11 @@
-<h3> Document Title: <input class="title" ng-blur="push_title()" type="text" ng-model="document_title"> </h3> 
+<div class="top_panel_points">
+	<h3> Document Title: <input class="title" ng-blur="push_title()" type="text" ng-model="document_title"> </h3> 
 
-<div><a href="#/{{document.id}}"> View document</a></div>
-<div><a href="#/"> Back to document list</a></div>
+	<div><a href="#/{{document.id}}"> View document</a></div>
+	<div><a href="#/"> Back to document list</a></div>
+</div>
 
 <h2> Points: </h2>
-
-<pointlist></pointlist>
-
-
+<div class="point_list">
+	<pointlist></pointlist>
+</div>

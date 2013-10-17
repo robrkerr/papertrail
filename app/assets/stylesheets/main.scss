@@ -32,15 +32,11 @@ body {
   font:                 16pt Delicious, Helvetica;
   height:               100%;
   width:                100%;
-  padding:              0px;
-  margin:               0px;
 }
 
 .uiview {
   height:               100%; 
   width:                100%;
-  padding:              0px;
-  margin:               0px;
 }
 
 @font-face {
@@ -87,10 +83,22 @@ button.in_text {
 }
 
 .top_panel {
-  height:               200px;
+  height:               165px;
   width:                100%;
   padding:              10px;
-  margin:               0px;
+}
+
+.top_panel_points {
+  height:               150px;
+  width:                100%;
+  padding:              10px;
+}
+
+.point_list {
+  position:             absolute;
+  height:               calc(100% - 150px);
+  padding:              10px 20px 10px;
+  overflow-y:           scroll;
 }
 
 .column_container {
@@ -118,7 +126,7 @@ button.in_text {
 
 .column_inner {
   display:              inline-block;
-  padding:              10px 20px 10px;
+  padding:              0px 5px 0px;
   width:                100%;
   height:               100%;
   overflow-y:           scroll;
@@ -130,8 +138,8 @@ button.in_text {
 .column_inner span.pointbox {
   width:                100%;
   display:              block;
-  padding-bottom:       15px;
-  padding-top:          10px;
+  padding:              8px 12px 10px;
+  margin:               0px 0px 10px;
 }
 
 .column_inner span.pointbox:hover {
@@ -140,6 +148,9 @@ button.in_text {
 
 .column_inner span.activated {
   font-weight:          bold;
+  /*border-radius:        20px;*/
+  border-width:         1px;
+  border-style:         solid;
 }
 
 .column_inner span.deactivated {
@@ -164,7 +175,7 @@ button.in_text {
   width:                100%;
   padding:              0px 10px;
   font-size:            0.9em;
-  border:               solid 1px blue;
+  /*border:               solid 1px blue;*/
   background-color:     rgba(245,245,255,1.0);
 }
 

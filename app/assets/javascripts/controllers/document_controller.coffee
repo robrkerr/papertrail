@@ -6,7 +6,7 @@ app.directive "mathjaxBind", ->
   restrict: "A"
   controller: ($scope, $element, $attrs) -> 
   	$scope.$watch $attrs.mathjaxBind, (value) ->
-      $element.text (if value is `undefined` then "" else value)
+      $element.text (if value.text is `undefined` then "" else value.text)
       MathJax.Hub.Queue ["Typeset", MathJax.Hub, $element[0]]
 
 app.directive "pointHeader", ->

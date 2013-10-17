@@ -14,8 +14,8 @@
 <div class="parent_column" style="width: {{panel_width}}px; left: {{-parent_shift*panel_width}}px">
 	<div class="column_inner">
 		<span class="pointbox {{point.class}} {{point.context}}" ng-click="select_as_parent(point,1)" ng-repeat="point in panel_points[panel_points.length-1].parents">
-			<span class="{{point.class}} context" point-header="point"></span>
-			<span class="{{point.context}}_inner" mathjax-bind="point.text"></span>
+			<span class="context" point-header="point"></span>
+			<span class="{{point.context}}_inner" mathjax-bind="point"></span>
 		</span>
 	</div>
 </div>
@@ -29,8 +29,9 @@
 	<div class="column_outer" style="width: {{panel_width}}px" ng-repeat="panel in panel_points">
 		<div class="column_inner">
 			<span class="pointbox {{point.class}} {{point.context}}" ng-click="activate(point,$parent.$index+1)" ng-repeat="point in panel.children">
-				<span class="{{point.class}} context" point-header="point"></span>
-				<span class="{{point.context}}_inner" mathjax-bind="point.text"></span>
+				<span class="context" point-header="point"></span>
+				<span ng-if="point.context != 'Figure'" class="{{point.context}}_inner" mathjax-bind="point"></span>
+				<img ng-if="point.context == 'Figure'" class="{{point.context}}_inner" src="{{point.text}}"></img>
 			</span>
 			<div ng-if="(panel_points.length == $index+1)">
 				<textarea class="comment_box" type="text" ng-model="panel_points[panel_points.length-1].new_comment"></textarea>
