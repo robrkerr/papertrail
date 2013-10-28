@@ -1,0 +1,13 @@
+<div class="imagebox" ng-click="step_back()" ng-if="path.length > 0">
+	<div class="colorbox with_children"></div>
+	<div class="inner_imagebox">
+		<div class="text_in_imagebox">←</div>
+	</div>
+	<!-- <img ng-if="point.context == 'Figure'" src="{{point.text}}"></img> -->
+</div>
+<div class="imagebox" ng-click="activate($index)" ng-repeat="point in active_point().children">
+	<div class="colorbox {{color_class(point)}}"></div>
+	<div class="inner_imagebox">
+		<img ng-if="point.context == 'Figure'" src="{{point.text}}"></img>
+	</div>
+</div>

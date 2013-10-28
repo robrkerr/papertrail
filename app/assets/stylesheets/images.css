@@ -1,0 +1,40 @@
+.imagebox {
+	width: 320px;
+	height: 320px;
+	float: left;
+	line-height: 320px;
+}
+
+.colorbox {
+	position: absolute;
+	width: 320px;
+	height: 320px;
+}
+
+.colorbox.with_children:hover {
+	background-color: rgba(0,80,200,0.2);
+}
+
+.colorbox.without_children:hover {
+	background-color: rgba(50,50,50,0.2);
+}
+
+.inner_imagebox {
+	display: inline-block;
+  vertical-align: middle;
+  width: 100%; 
+}
+
+.imagebox img {
+	max-width: 100%; 
+	max-height: 100%;
+	display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.text_in_imagebox {
+	font-size: 100pt;
+	color: gray;
+	text-align: center;
+}
