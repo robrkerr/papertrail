@@ -27,7 +27,7 @@ app.controller "DocumentController", ($scope, $window, $stateParams, Restangular
 	Restangular.all('contexts').getList().then (data) ->
 		$scope.contexts = data
 	$scope.document = Restangular.one('documents',$stateParams.document_id)
-	$scope.num_panels = 2
+	$scope.num_panels = 2.5
 	$scope.parent_shift = 1;
 	$scope.panel_width = ($window.innerWidth*0.985)/$scope.num_panels
 	$window.onresize = () ->
@@ -41,16 +41,44 @@ app.controller "DocumentController", ($scope, $window, $stateParams, Restangular
 		$scope.panel_points = [$scope.title_point]
 		$scope.retrieve_subpoints = (ind) ->
 			point = $scope.panel_points[ind]
-			$scope.document.one('points',point.id).get().then (data) ->
-				point.children = data.children
-				point.parents = data.parents
-				point.instances = data.instances
-				point.context = data.context
-				$scope.set_children_class(point,"")
-				$scope.set_parents_class(point,"deactivated")
-				angular.forEach point.parents, (value) ->
-					if value.id == $scope.panel_points[ind-1].id
-						value.class = "activated"
+			if point.referenced_point is undefined
+				$scope.document.one('points',point.id).get().then (data) ->
+					point.children = data.children
+					point.parents = data.parents
+					point.instances = data.instances
+					point.context = data.context
+					$scope.set_children_class(point,"")
+					$scope.set_parents_class(point,"deactivated")
+					angular.forEach point.parents, (value) ->
+						if value.id == $scope.panel_points[ind-1].id
+							value.class = "activated"
+			else
+				point.referenced_point.get().then (data) ->
+					point.referenced_point = data
+					point.children = data.children
+					$scope.set_children_class(point,"")
+					$scope.document.one('points',point.id).get().then (data) ->
+						point.parents = data.parents
+						point.instances = data.instances
+						point.context = data.context
+						$scope.set_parents_class(point,"deactivated")
+						angular.forEach point.parents, (value) ->
+							if value.id == $scope.panel_points[ind-1].id
+								value.class = "activated"
+		$scope.get_referenced_point = (point) ->
+			if point.referenced_point is undefined
+				doc_id = point.text.split("-")[0]
+				point_id = point.text.split("-")[1]
+				point.referenced_document = Restangular.one('documents',doc_id)
+				point.referenced_document.get().then (data) ->
+					point.referenced_document.title = data.title.text
+				point.referenced_point = point.referenced_document.one('points',point_id)
+				point.referenced_point.get().then (data) ->
+					point.referenced_point = data
+					point.children = data.children
+					point.referenced_point
+			else 
+				point.referenced_point
 		$scope.activate = (point,panel) ->
 			if ($scope.panel_points.length == panel)
 				$scope.panel_points.push(point)

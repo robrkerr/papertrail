@@ -19,7 +19,8 @@ Context.create([{ description: 'Title', position: 0 },
 								{ description: 'Figure', position: 6 },
 								{ description: 'Equation', position: 7 },
 								{ description: 'Reference', position: 8 },
-								{ description: 'Comment', position: 9 }])
+								{ description: 'Smart Reference', position: 9 },
+								{ description: 'Comment', position: 10 }])
 
 ## Example document
 require "#{Rails.root}/db/document_importer.rb"

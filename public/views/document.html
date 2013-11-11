@@ -19,9 +19,9 @@
 		</span>
 	</div>
 </div>
-<div class="column_container" style="left: {{(num_panels-parent_shift-panel_points.length)*panel_width}}px">
+<div class="column_container" style="left: {{(num_panels-1+(1-parent_shift)*0.49-panel_points.length)*panel_width}}px">
 	<div class="column_outer" style="width: {{panel_width}}px">
-		<div class="column_inner">
+		<div class="column_inner narrow_column" style="text-align: left">
 			<h3>Abstract →</h3>
 			Click on different sections for further details. 
 		</div>
@@ -30,7 +30,11 @@
 		<div class="column_inner">
 			<span class="pointbox {{point.class}} {{point.context}}" ng-click="activate(point,$parent.$index+1)" ng-repeat="point in panel.children">
 				<span class="context" point-header="point"></span>
-				<span ng-if="point.context != 'Figure'" class="{{point.context}}_inner" mathjax-bind="point"></span>
+				<span ng-if="(point.context != 'Figure') && (point.context != 'Smart Reference')" class="{{point.context}}_inner" mathjax-bind="point"></span>
+				<span ng-if="point.context == 'Smart Reference'" class="Reference_inner">
+					<span style="display: block; font-size: 0.8em">From: {{point.referenced_document.title}}</span>
+					<span style="display: block">{{get_referenced_point(point).text}}</span>
+				</span>
 				<img ng-if="point.context == 'Figure'" class="{{point.context}}_inner" src="{{point.text}}"></img>
 			</span>
 			<div ng-if="(panel_points.length == $index+1)">

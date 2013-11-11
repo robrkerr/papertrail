@@ -80,13 +80,13 @@ app.directive "pointlist", ($compile) ->
 					$scope.push_point_text = (point) ->
 						updated_point = $scope.document.one('points',point.id)
 						updated_point.text = point.text
-						updated_point.put()
-						$scope.load_points()
+						updated_point.put().then (data) ->
+							$scope.load_points()
 					$scope.push_point_context = (point) ->
 						updated_point = $scope.document.one('points',point.id)
 						updated_point.context_id = point.context_id
-						updated_point.put()
-						$scope.load_points()
+						updated_point.put().then (data) ->
+							$scope.load_points()
 					$scope.create_point = () ->
 						$scope.document.all('points').post().then (data) ->
 							$scope.load_points()

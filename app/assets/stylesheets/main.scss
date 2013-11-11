@@ -104,6 +104,7 @@ button.in_text {
 .column_container {
   position:             absolute;
   height:               calc(100% - 200px);
+  width:                100000px;
   -webkit-transition:   left 0.25s;
   transition:           left 0.25s;
 }
@@ -135,8 +136,13 @@ button.in_text {
   text-align:           justify;
 }
 
+.narrow_column {
+  width:                40%;
+}
+
 .column_inner span.pointbox {
-  width:                100%;
+  box-sizing:           content-box;
+  width:                calc(100% - 24px);
   display:              block;
   padding:              8px 12px 10px;
   margin:               0px 0px 10px;
@@ -151,6 +157,14 @@ button.in_text {
   /*border-radius:        20px;*/
   border-width:         1px;
   border-style:         solid;
+}
+
+.parent_column .column_inner span.pointbox {
+  background-color:     rgba(200,200,255,0.2);
+}
+
+.parent_column .column_inner span.pointbox.activated {
+  background-color:     rgba(200,200,255,0.5);
 }
 
 .column_inner span.deactivated {
@@ -183,6 +197,10 @@ button.in_text {
   display:              block;
   /*font-size:            0.75em;*/
   text-align:           center;
+}
+
+.Figure_inner {
+  width: 100%;
 }
 
 .editable_point {
