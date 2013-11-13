@@ -5,7 +5,7 @@
 	<div><a href="#/">Back to document list</a></div>
 
 	<div>
-		<button class="in_text" ng-click="jump_back()">Jump back</button>
+		<button class="in_text" ng-click="jump_back()" ng-if="(panel_points.length > 1)">Jump back</button>
 		<button class="in_text" ng-click="see_parents()" ng-if="(parent_shift == 1) && (panel_points.length > 2)">See parents</button>
 		<button class="in_text" ng-click="see_children()" ng-if="parent_shift == 0">See children</button>
 	</div>

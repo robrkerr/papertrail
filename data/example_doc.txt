@@ -1,0 +1,27 @@
+Delay Selection by Spike-Timing-Dependent Plasticity in Recurrent Networks of Spiking Neurons Receiving Oscillatory Inputs
+
+Background: Learning rules, such as spike-timing-dependent plasticity (STDP), change the structure of networks of neurons based on the firing activity. A network level understanding of these mechanisms can help infer how the brain learns patterns and processes information. Previous studies have shown that STDP selectively potentiates feed-forward connections that have specific axonal delays, and that this underlies behavioral functions such as sound localization in the auditory brainstem of the barn owl. 
+	Background: Spike-timing-dependent plasticity (STDP) is an experimentally observed learning rule that changes synaptic strengths based on the relative timing of pre- and post-synaptic spikes (action potentials). 
+		Reference: Markram H, Lubke J, Frotscher M, Sakmann B (1997) Regulation of synaptic efficacy by coincidence of postsynaptic APs and EPSPs. Science 275: 213-215.
+		Reference: Bi GQ, Poo MM (1998) Synaptic modifications in cultured hippocampal neurons: Dependence on spike timing, synaptic strength, and postsynaptic cell type. J Neurosci 18: 10464-10472.
+		Reference: Dan Y, Poo MM (2004) Spike timing-dependent plasticity of neural circuits. Neuron 44: 23-30.
+	Background: Gerstner et. al. first proposed it as an unsupervised Hebbian learning rule that could select feed-forward connections with specific axonal delays. 
+		Background: They showed that it could be used to achieve the high degree of temporal coherence that had been observed at frequencies of up to 8kHz in the auditory brainstem of barn owls. 
+		Background: This finding explained how a network could learn to perform sound localization using the time lag between the neural signals from the two ears. 
+		Background: Their study also demonstrated that the precise timing of spikes could be captured by STDP and that this was sufficient to explain how neurons in the auditory pathway could learn to distinguish such fine temporal differences in an unsupervised fashion. 
+		Reference: Gerstner W, Kempter R, van Hemmen JL, Wagner H (1996) A neuronal learning rule for submillisecond temporal coding. Nature 383: 76-81.
+	Background: In general, STDP has the ability to encode temporal correlations in neuronal activity, such as oscillations, into the functional structure of networks of neurons that have axonal and dendritic propagation delays.
+		Comment: Good point.
+Method: In this study, we investigated how STDP leads to the selective potentiation of recurrent connections with different axonal and dendritic delays during oscillatory activity. We developed analytical models of learning with additive STDP in recurrent networks driven by oscillatory inputs, and supported the results using simulations with leaky integrate-and-fire neurons. 
+	Method: Our analytical work used the Poisson neuron model.
+		Method: This is a stochastic model which outputs a spike train that is a realization of an inhomogeneous Poisson process.
+		Method: The intensity function for the \(i\)th neuron at time \(t\) is given by \(\lambda_i(t)\).
+			Equation: \(\lambda_i(t) = \nu_0 + \displaystyle\sum\limits_{j \neq i} J_{ij}(t) \displaystyle\sum\limits_{n} \epsilon(t - t_{j,n} - d^\text{ax}_{ij} - d^\text{den}_{ij})\)
+				Method: It is made up of a spontaneous rate and the weighted sum of post-synaptic response kernels. 
+			Method: This quantity is analogous to the membrane potential of the neuron.
+		Reference: Kempter R, Gerstner W, van Hemmen JL (1999) Hebbian learning and spiking neurons. Phys Rev E 59: 4498-4514.
+Result: Our results showed selective potentiation of connections with specific axonal delays, which depended on the input frequency. In addition, we demonstrated how this can lead to a network becoming selective in the amplitude of its oscillatory response to this frequency. We extended this model of axonal delay selection within a single recurrent network in two ways. First, we showed the selective potentiation of connections with a range of both axonal and dendritic delays. Second, we showed axonal delay selection between multiple groups receiving out-of-phase, oscillatory inputs. 
+	Result: We compared the learning that occurs with 120Hz inputs, shown analytically in Panel A, to simulations with 10,000 LIF neurons. This is shown in Panel B. 
+		Figure: http://www.ploscompbiol.org/article/fetchObject.action?uri=info:doi/10.1371/journal.pcbi.1002897.g004&representation=PNG_M
+Discussion: We discuss the application of these models to the formation and activation of neuronal ensembles or cell assemblies in the cortex, and also to missing fundamental pitch perception in the auditory brainstem. 
+Comment: The significance of this work needs to be further discussed. 
